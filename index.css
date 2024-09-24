@@ -76,3 +76,7 @@ header {
 .post-header .user-avatar {
     padding-right: 5px;
 }
+
+.post {
+    border-bottom: #ededed solid 25px;
+}

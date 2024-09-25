@@ -34,6 +34,8 @@ for (let i = 0; i < posts.length; i++) {
     timeline.appendChild(createPost(posts[i]))
 }
 
+setLikeListeners()
+
 function createPost(post) {
     let postEl = document.createElement("section")
     postEl.classList.add("post")
@@ -81,6 +83,7 @@ function createPost(post) {
     icons[1].src = "images/icon-comment.png"
     icons[2].src = "images/icon-dm.png"
 
+    icons[0].classList.add("like")
     // add icons to icons container
     let iconsContainer = document.createElement("div")
     iconsContainer.classList.add("post-icons-container", "side-padding")
@@ -113,6 +116,23 @@ function createPost(post) {
 
     // return post
     return postEl
+}
+
+function setLikeListeners() {
+    let likeButtons = document.getElementsByClassName("icon like")
+    for (let i = 0; i < likeButtons.length; i++) {
+        likeButtons[i].addEventListener("click", function () {
+            let numberStrings = likeButtons[i].parentElement.nextElementSibling.textContent.match(/\d+/g)
+            let numbers = numberStrings.map((str) => Number(str))
+            let number = 0
+            for (let i = 0; i < numbers.length; i++) {
+                number *= 1000
+                number += numbers[i]
+            }
+            number++
+            likeButtons[i].parentElement.nextElementSibling.textContent = number + " likes"
+        })
+    }
 }
 
 
